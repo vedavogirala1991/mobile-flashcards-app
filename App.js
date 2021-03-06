@@ -1,21 +1,32 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+//Import React and React Native
+import React, {Component} from 'react'
+import { StyleSheet, Text, View, Platform } from 'react-native'
+//Navigation imports
+import {createAppContainer} from 'react-navigation'
+import {createBottomTabNavigator} from 'react-navigation-tabs'
+import {createStackNavigator} from 'react-navigation-stack'
+//UI Components
+import Decks from './components/Decks'
+import AddDeck from './components/AddDeck'
+import DeckDetails from './components/DeckDetails'
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+
+
+class App extends Component {
+
+  render () {
+    return (
+      <View style={styles.container}>
+        <Decks />
+      </View>
+    )
+  }
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
   },
-});
+})
+
+export default App
