@@ -5,11 +5,13 @@ import { StyleSheet, Text, View, Platform } from 'react-native'
 class Deck extends Component {
   render () {
     const deck = this.props.deck
-    
+
     return (
       <View style={styles.container}>
+      <TouchableOpacity onPress={console.log('on press deck')}>
         <Text>{deck.title}</Text>
         <Text>{deck.count} Cards</Text>
+      </TouchableOpacity>
       </View>)
   }
 }

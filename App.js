@@ -27,7 +27,7 @@ class App extends Component {
     return (
       <View style={styles.container}>
         <FlashCardsStatusBar backgroundColor={'#292477'} barStyle='light-content' />
-        <Decks />
+        <AddDeck />
       </View>
     )
   }
