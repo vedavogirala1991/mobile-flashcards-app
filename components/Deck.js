@@ -1,6 +1,6 @@
 //Import React and React Native
 import React, {Component} from 'react'
-import { StyleSheet, Text, View, Platform } from 'react-native'
+import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
 
 class Deck extends Component {
   render () {
