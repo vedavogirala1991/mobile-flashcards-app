@@ -12,7 +12,7 @@ import { FontAwesome, Ionicons } from '@expo/vector-icons'
 //UI Components
 import Decks from './components/Decks'
 import AddDeck from './components/AddDeck'
-import DeckDetails from './components/DeckDetails'
+import Deck from './components/Deck'
 
 const FlashCardsStatusBar = ({backgroundColor,...props}) => {
   return (
@@ -72,8 +72,8 @@ const MainNav = createAppContainer(createStackNavigator({
       }
     }
   },
-  DeckDetails : {
-    screen : DeckDetails,
+  Deck : {
+    screen : Deck,
     navigationOptions : {
       headerTintColor : 'white',
       headerStyle : {
