@@ -1,11 +1,9 @@
 //Import React and React Native
 import React, {Component} from 'react'
-import { StyleSheet, Text, View, Platform } from 'react-native'
+import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
 //Import Data from api and helper calls
 import {fetchDeckDetails} from '../utils/api'
 import {formDeckOverview} from '../utils/helpers'
-//Other UI Components
-import Deck from './Deck'
 
 class Decks extends Component {
   state = {
@@ -32,7 +30,15 @@ class Decks extends Component {
           let deckDet = formDeckOverview(deck)
 
           return (
-            <Deck key={deckDet.title} deck={deckDet}/>)
+            <View key={deckDet.title}>
+              <TouchableOpacity onPress={() => this.props.navigation.navigate(
+                'DeckDetails',
+                {deck : deckDet}
+                )}>
+                <Text>{deckDet.title}</Text>
+                <Text>{deckDet.count} Cards</Text>
+              </TouchableOpacity>
+            </View>)
         })}
       </View>
     )

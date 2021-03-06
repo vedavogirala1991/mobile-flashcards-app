@@ -22,7 +22,7 @@ const FlashCardsStatusBar = ({backgroundColor,...props}) => {
   )
 }
 
-const RouteConfigs = {
+const TabRouteConfigs = {
   Decks : {
     screen : Decks,
     navigationOptions : {
@@ -59,7 +59,33 @@ const TabNavigatorConfig = {
   }
 }
 
-const Tabs = createAppContainer(createBottomTabNavigator(RouteConfigs,TabNavigatorConfig))
+const Tabs = createBottomTabNavigator(TabRouteConfigs,TabNavigatorConfig)
+
+const MainNav = createAppContainer(createStackNavigator({
+  Home : {
+    screen : Tabs,
+    navigationOptions : {
+      headerShown : true,
+      headerTintColor : 'white',
+      headerStyle : {
+        backgroundColor : '#292477',
+      }
+    }
+  },
+  DeckDetails : {
+    screen : DeckDetails,
+    navigationOptions : {
+      headerTintColor : 'white',
+      headerStyle : {
+        backgroundColor : '#292477',
+      }
+    }
+  }
+}, {
+  navigationOptions : {
+    headerShown : false,
+  },
+}))
 
 class App extends Component {
 
@@ -67,7 +93,7 @@ class App extends Component {
     return (
       <View style={styles.container}>
         <FlashCardsStatusBar backgroundColor={'#292477'} barStyle='light-content' />
-        <Tabs />
+        <MainNav />
       </View>
     )
   }

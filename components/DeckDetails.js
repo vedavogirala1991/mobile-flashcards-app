@@ -2,9 +2,10 @@
 import React, {Component} from 'react'
 import { StyleSheet, Text, View, Platform } from 'react-native'
 
-class Deck extends Component {
+class DeckDetails extends Component {
   render () {
-    const deck = this.props.deck
+    const {deck} = this.props
+    console.log('Deck --- ',deck)
 
     return (
       <View style={styles.container}>
@@ -31,4 +32,4 @@ const styles = StyleSheet.create({
   },
 })
 
-export default Deck
+export default DeckDetails

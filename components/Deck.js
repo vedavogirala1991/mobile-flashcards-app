@@ -4,14 +4,17 @@ import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
 
 class Deck extends Component {
   render () {
-    const deck = this.props.deck
+    const {deck, navigation} = this.props
 
     return (
       <View style={styles.container}>
-      <TouchableOpacity onPress={console.log('on press deck')}>
-        <Text>{deck.title}</Text>
-        <Text>{deck.count} Cards</Text>
-      </TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate(
+          'DeckDetails',
+          {deck : deck}
+        )}>
+          <Text>{deck.title}</Text>
+          <Text>{deck.count} Cards</Text>
+        </TouchableOpacity>
       </View>)
   }
 }
