@@ -5,7 +5,7 @@ import { StyleSheet, Text, View, Platform } from 'react-native'
 class Deck extends Component {
   render () {
     const deck = this.props.deck
-    console.log('Deck --- :',deck)
+    
     return (
       <View style={styles.container}>
         <Text>{deck.title}</Text>
