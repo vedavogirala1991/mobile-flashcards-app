@@ -4,6 +4,8 @@ import { StyleSheet, Text, View, Platform } from 'react-native'
 //Import Data from api and helper calls
 import {fetchDeckDetails} from '../utils/api'
 import {formDeckOverview} from '../utils/helpers'
+//Other UI Components
+import Deck from './Deck'
 
 class Decks extends Component {
   state = {
@@ -30,10 +32,7 @@ class Decks extends Component {
           let deckDet = formDeckOverview(deck)
 
           return (
-            <View key={deckDet.title}>
-              <Text>{deckDet.title}</Text>
-              <Text>{deckDet.count} Cards</Text>
-            </View>)
+            <Deck key={deckDet.title} deck={deckDet}/>)
         })}
       </View>
     )
