@@ -13,7 +13,7 @@ class Deck extends Component {
       <View style={styles.container}>
         <Text>{deck.title}</Text>
         <Text>{deck.count} Cards</Text>
-        <TextButton onPress={console.log('On Press')} style={{margin : 20}}>
+        <TextButton onPress={this.props.navigation.navigate('AddCard')} style={{margin : 20}}>
           Add Card
         </TextButton>
         <TextButton onPress={console.log('On Press')} style={{margin : 20}}>
