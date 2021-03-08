@@ -14,7 +14,9 @@ class AddDeck extends Component {
         <TextInput
           style={{ width : 200,height: 40, borderColor: 'gray', borderWidth: 1 }}>
         </TextInput>
-        <TextButton onPress={console.log('On Press')} style={{margin : 20}}>
+        <TextButton
+          onPress={() => this.props.navigation.navigate('Home')}
+          style={{margin : 20}}>
           Submit
         </TextButton>
       </View>)

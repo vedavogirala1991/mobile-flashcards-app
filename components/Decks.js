@@ -1,25 +1,28 @@
 //Import React and React Native
 import React, {Component} from 'react'
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
+//React Redux
+import {connect} from 'react-redux'
+//Actions
+import {recieveDecks} from '../actions'
 //Import Data from api and helper calls
 import {fetchDeckDetails} from '../utils/api'
 import {formDeckOverview} from '../utils/helpers'
 
 class Decks extends Component {
   state = {
-    decks : {},
+    ready : false,
   }
 
   componentDidMount () {
-    const decks = fetchDeckDetails()
+    const {dispatch} = this.props
 
-    this.setState(() => ({
-      decks,
-    }))
+    fetchDeckDetails()
+    .then((decks) => dispatch(recieveDecks(decks)))
   }
 
   render () {
-    const {decks} = this.state
+    const {decks} = this.props
 
     console.log('render : ',decks)
 
@@ -32,7 +35,7 @@ class Decks extends Component {
           return (
             <View key={deckDet.title}>
               <TouchableOpacity onPress={() => this.props.navigation.navigate(
-                'Deck',
+                'Details',
                 {deck : deckDet}
               )}>
                 <View>
@@ -57,4 +60,10 @@ const styles = StyleSheet.create({
   },
 })
 
-export default Decks
+const mapStateToProps = (decks) => {
+  return {
+    decks
+  }
+}
+
+export default connect(mapStateToProps)(Decks)

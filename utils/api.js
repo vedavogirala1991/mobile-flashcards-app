@@ -1,5 +1,7 @@
-import {retrieveDecks} from './_decks'
+import {retrieveDecks,FLASHCARDS_STORAGE_KEY} from './_decks'
+import { AsyncStorage } from 'react-native'
 
 export const fetchDeckDetails = () => {
-  return retrieveDecks()
+  return AsyncStorage.getItem(FLASHCARDS_STORAGE_KEY)
+    .then(retrieveDecks)
 }
