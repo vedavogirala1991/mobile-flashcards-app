@@ -28,18 +28,18 @@ class AddCard extends Component {
   }
 
   addDeckCard = () => {
-    const {dispatch,deckName,decks} = this.props
-    const {question,answer} =this.state
-    const ques = {
-      question : question,
-      answer : answer
+    const {dispatch,deckName} = this.props
+
+    const card = {
+      question: this.state.question,
+      answer: this.state.answer
     }
-    console.log('addDeckCard ques : ',ques)
-    dispatch(addDeckCard({deckName,ques},decks))
 
-    addDeckCardDetails({deckName,ques})
+    dispatch(addDeckCard(deckName,card))
 
-    this.toDeck()
+    addDeckCardDetails(deckName,card)
+
+    //this.toDeck()
   }
 
 

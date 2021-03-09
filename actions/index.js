@@ -18,11 +18,10 @@ export const addDeck = (deck) => {
   }
 }
 
-export const addDeckCard = (info,decks) => {
-  console.log('Actions deck : ',decks)
+export const addDeckCard = (deckName,card) => {
   return {
     type: ADD_DECK_CARD,
-    info,
-    decks,
+    deckName,
+    card,
   }
 }

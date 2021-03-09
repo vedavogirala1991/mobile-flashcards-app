@@ -7,8 +7,11 @@ export const fetchDeckDetails = () => {
 }
 
 export const fetchDeck = (deckName) => {
-  AsyncStorage.getItem(FLASHCARDS_STORAGE_KEY)
-  return JSON.parse(AsyncStorage.getItem(FLASHCARDS_STORAGE_KEY))[deckName]
+  console.log('fetchDeck : deckName : ',deckName)
+  const decks = JSON.parse(AsyncStorage.getItem(FLASHCARDS_STORAGE_KEY))
+  console.log('fetchDeck : deckName : ',deckName)
+  console.log('fetchDeck : decks : ',decks)
+  return decks[deckName]
 }
 
 export const addDeckDetails = (deck) => {
@@ -16,13 +19,15 @@ export const addDeckDetails = (deck) => {
     JSON.stringify({deck}))
 }
 
-export const addDeckCardDetails = ({deckName,ques}) => {
+export const addDeckCardDetails = (deckName,card) => {
+  console.log('addDeckCardDetails : deckName : ',deckName)
+  console.log('addDeckCardDetails : card : ',card)
   const deck = fetchDeck(deckName)
-
+  console.log('addDeckCardDetails : deck : ',deck)
   return AsyncStorage.mergeItem(FLASHCARDS_STORAGE_KEY,
     JSON.stringify({
       [deckName] : {
-        questions : [...deck.questions].concat(ques)
+        questions : [...deck.questions].concat(card)
       }
     })
   )
