@@ -1,23 +1,73 @@
 //Import React and React Native
 import React, {Component} from 'react'
 import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native'
+//React Redux
+import {connect} from 'react-redux'
+import {addDeckCard} from '../actions'
 //UI components
 import TextButton from './TextButton'
+//Add deck details API
+import {addDeckCardDetails} from '../utils/api'
 
 class AddCard extends Component {
+  state = {
+    question : '',
+    answer : '',
+  }
+
+  handleQuestion = (question) => {
+    this.setState(()=> ({
+      question,
+    }))
+  }
+
+  handleAnswer = (answer) => {
+    this.setState(()=> ({
+      answer,
+    }))
+  }
+
+  addDeckCard = () => {
+    const {dispatch,deckName,decks} = this.props
+    const {question,answer} =this.state
+    const ques = {
+      question : question,
+      answer : answer
+    }
+    console.log('addDeckCard ques : ',ques)
+    dispatch(addDeckCard({deckName,ques},decks))
+
+    addDeckCardDetails({deckName,ques})
+
+    this.toDeck()
+  }
+
+
+
   render () {
-    const deck = this.props.deck
+    const {deckName} = this.props
+    console.log('Deck Name : ',deckName)
+    const {question,answer} = this.state
+
+    console.log('Deck question : ',question)
+    console.log('Deck answer : ',answer)
 
     return (
       <View style={styles.container}>
         <Text>Enter Flash cards details</Text>
         <TextInput
-          style={{ width : 200,height: 40, borderColor: 'gray', borderWidth: 1 }}>
-        </TextInput>
+          style={{ width : 200,height: 40, borderColor: 'gray', borderWidth: 1 }}
+          placeholder = 'Question'
+          placeholderTextColor = '#9a73ef'
+          autoCapitalize = 'none'
+          onChangeText = {this.handleQuestion}/>
         <TextInput
-          style={{ width : 200,height: 40, borderColor: 'gray', borderWidth: 1 }}>
-        </TextInput>
-        <TextButton onPress={console.log('On Press')} style={{margin : 20}}>
+          style={{ width : 200,height: 40, borderColor: 'gray', borderWidth: 1 }}
+          placeholder = 'Answer'
+          placeholderTextColor = '#9a73ef'
+          autoCapitalize = 'none'
+          onChangeText = {this.handleAnswer}/>
+        <TextButton onPress={this.addDeckCard} style={{margin : 20}}>
           Submit
         </TextButton>
       </View>)
@@ -33,4 +83,13 @@ const styles = StyleSheet.create({
   },
 })
 
-export default AddCard
+const mapStateToProps = (decks, {navigation}) => {
+  const {deck} = navigation.state.params
+
+  return {
+    deckName : decks[deck].title,
+    decks,
+  }
+}
+
+export default connect(mapStateToProps)(AddCard)

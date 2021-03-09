@@ -4,6 +4,8 @@ import {createAppContainer} from 'react-navigation'
 import {createStackNavigator} from 'react-navigation-stack'
 //Components
 import Deck from '../components/Deck'
+import AddCard from '../components/AddCard'
+import Quiz from '../components/Quiz'
 import Tabs from './TabsNavigator'
 
 export default Navigator = createAppContainer(createStackNavigator({
@@ -17,7 +19,7 @@ export default Navigator = createAppContainer(createStackNavigator({
       }
     }
   },
-  Details : {
+  Deck : {
     screen : Deck,
     navigationOptions : {
       headerTintColor : 'white',
@@ -25,7 +27,27 @@ export default Navigator = createAppContainer(createStackNavigator({
         backgroundColor : '#292477',
       }
     }
-  }
+  },
+  AddCard : {
+    screen : AddCard,
+    navigationOptions : {
+      headerShown : true,
+      headerTintColor : 'white',
+      headerStyle : {
+        backgroundColor : '#292477',
+      }
+    }
+  },
+  Quiz : {
+    screen : Quiz,
+    navigationOptions : {
+      headerShown : true,
+      headerTintColor : 'white',
+      headerStyle : {
+        backgroundColor : '#292477',
+      }
+    }
+  },
 }, {
   navigationOptions : {
     headerShown : false,

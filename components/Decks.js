@@ -44,7 +44,7 @@ class Decks extends Component {
           return (
             <View key={deck.title}>
               <TouchableOpacity onPress={() => this.props.navigation.navigate(
-                'Details',
+                'Deck',
                 {deck : deck.title}
               )}>
                 <View>

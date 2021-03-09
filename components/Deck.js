@@ -7,6 +7,13 @@ import {connect} from 'react-redux'
 import TextButton from './TextButton'
 
 class Deck extends Component {
+
+  toAddCard = (title) => {
+    this.props.navigation.navigate('AddCard',{
+      deck : title
+    })
+  }
+
   render () {
     const {deck} = this.props
     console.log('Deck --- ',deck)
@@ -15,7 +22,7 @@ class Deck extends Component {
       <View style={styles.container}>
         <Text>{deck.title}</Text>
         <Text>{deck.questions.length} Cards</Text>
-        <TextButton onPress={this.props.navigation.navigate('AddCard')} style={{margin : 20}}>
+        <TextButton onPress={()=>this.toAddCard(deck.title)} style={{margin : 20}}>
           Add Card
         </TextButton>
         <TextButton onPress={console.log('On Press')} style={{margin : 20}}>
@@ -45,18 +52,5 @@ const mapStateToProps = (decks, {navigation}) => {
     deck : decks[deck]
   }
 }
-
-// const mapDispatchToProps = (dispatch, {navigation}) => {
-//   const {entryId} = navigation.state.params
-//
-//   return {
-//     remove : () => dispatch(addEntry({
-//       [entryId] : timeToString() === entryId
-//         ? getDailyReminderValue()
-//         : new Array()
-//     })),
-//     goBack : () => navigation.goBack(),
-//   }
-// }
 
 export default connect(mapStateToProps)(Deck)
