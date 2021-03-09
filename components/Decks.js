@@ -5,9 +5,11 @@ import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
 import {connect} from 'react-redux'
 //Actions
 import {recieveDecks} from '../actions'
+//App loading
+import AppLoading from 'expo-app-loading'
 //Import Data from api and helper calls
 import {fetchDeckDetails} from '../utils/api'
-import {formDeckOverview} from '../utils/helpers'
+import {formDeckOverview, formatDecks} from '../utils/helpers'
 
 class Decks extends Component {
   state = {
@@ -18,29 +20,36 @@ class Decks extends Component {
     const {dispatch} = this.props
 
     fetchDeckDetails()
-    .then((decks) => dispatch(recieveDecks(decks)))
+      .then((decks) => dispatch(recieveDecks(decks)))
+      .then(()=>this.setState(() => ({
+          ready : true,
+        })))
   }
 
   render () {
     const {decks} = this.props
+    const {ready} = this.state
 
-    console.log('render : ',decks)
+    if(ready===false) {
+      <AppLoading/>
+    }
 
 
     return (
       <View style={styles.container}>
-        {Object.entries(decks).map((deck)=>{
-          let deckDet = formDeckOverview(deck)
+        {Object.keys(decks).map((key)=>{
+
+          const deck = decks[key]
 
           return (
-            <View key={deckDet.title}>
+            <View key={deck.title}>
               <TouchableOpacity onPress={() => this.props.navigation.navigate(
                 'Details',
-                {deck : deckDet}
+                {deck : deck.title}
               )}>
                 <View>
-                  <Text>{deckDet.title}</Text>
-                  <Text>{deckDet.count} Cards</Text>
+                  <Text>{deck.title}</Text>
+                  <Text>{deck.questions.length} Cards</Text>
                 </View>
               </TouchableOpacity>
             </View>)

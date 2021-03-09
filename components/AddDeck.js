@@ -1,21 +1,59 @@
 //Import React and React Native
 import React, {Component} from 'react'
 import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native'
+import {NavigationActions} from 'react-navigation'
+//Add deck details API
+import {addDeckDetails} from '../utils/api'
+
+import {formatDeck} from '../utils/helpers'
+//Action
+import {addDeck} from '../actions'
+//React Redux
+import {connect} from 'react-redux'
 //UI components
 import TextButton from './TextButton'
 
 class AddDeck extends Component {
+  state = {
+    deckName : '',
+  }
+  handleDeckName = (text) => {
+    this.setState(()=> ({
+      deckName : text,
+    }))
+  }
+
+  toHome = () => {
+    this.props.navigation.navigate('Decks')
+  }
+
+  addDeck = (deckName) => {
+    const {dispatch} = this.props
+
+    const deck = formatDeck(deckName)
+
+    dispatch(addDeck(deck))
+
+    addDeckDetails(deck)
+
+    this.toHome()
+  }
+
+
   render () {
-    const deck = this.props.deck
+    const {deckName} = this.state
 
     return (
       <View style={styles.container}>
-        <Text>Enter the Deck Title</Text>
+        <Text>Enter the Deck Name</Text>
         <TextInput
-          style={{ width : 200,height: 40, borderColor: 'gray', borderWidth: 1 }}>
-        </TextInput>
+          style={{ width : 200,height: 40, borderColor: 'gray', borderWidth: 1 }}
+          placeholder = 'Deck Name'
+          placeholderTextColor = '#9a73ef'
+          autoCapitalize = 'none'
+          onChangeText = {this.handleDeckName}/>
         <TextButton
-          onPress={() => this.props.navigation.navigate('Home')}
+          onPress={()=>this.addDeck(deckName)}
           style={{margin : 20}}>
           Submit
         </TextButton>
@@ -32,4 +70,10 @@ const styles = StyleSheet.create({
   },
 })
 
-export default AddDeck
+const mapStateToProps = (state,{navigation}) => {
+  return {
+    state,
+  }
+}
+
+export default connect(mapStateToProps)(AddDeck)

@@ -1,4 +1,5 @@
 import { AsyncStorage } from 'react-native'
+import {formatDecks} from './helpers'
 
 export const FLASHCARDS_STORAGE_KEY = 'MobileFlashCards:decks'
 
@@ -24,12 +25,10 @@ let decks = {
         answer : 'The combination of a function and the lexical environment within which that function was declared.',
       },
     ],
-  }
+  },
 }
 
 export function retrieveDecks () {
-  console.log('Decks :: ',decks)
   AsyncStorage.setItem(FLASHCARDS_STORAGE_KEY, JSON.stringify(decks))
-
   return decks
 }
