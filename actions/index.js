@@ -1,6 +1,7 @@
 export const RECEIVE_DECKS = 'RECEIVE_DECKS'
 export const ADD_DECK = 'ADD_DECK'
 export const ADD_DECK_CARD = 'ADD_DECK_CARD'
+export const REMOVE_DECK ='REMOVE_DECK'
 import {fetchDeckDetails} from '../utils/api'
 
 export const recieveDecks = (decks) => {
@@ -23,5 +24,12 @@ export const addDeckCard = (deckName,card) => {
     type: ADD_DECK_CARD,
     deckName,
     card,
+  }
+}
+
+export const removeDeck = (deckName) => {
+  return {
+    type: REMOVE_DECK,
+    deckName,
   }
 }

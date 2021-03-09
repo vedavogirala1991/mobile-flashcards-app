@@ -35,11 +35,23 @@ class AddCard extends Component {
       answer: this.state.answer
     }
 
+    this.toDeck()
+
     dispatch(addDeckCard(deckName,card))
 
-    addDeckCardDetails(deckName,card)
+    addDeckCardDetails(deckName,card,this.props.decks)
 
-    //this.toDeck()
+    this.setState(()=>({
+      question : '',
+      answer : '',
+    }))
+
+  }
+
+  toDeck = () => {
+    this.props.navigation.navigate('Deck',{
+      deck : this.props.deckName
+    })
   }
 
 

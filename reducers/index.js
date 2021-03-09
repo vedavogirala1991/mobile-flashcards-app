@@ -1,4 +1,4 @@
-import { RECEIVE_DECKS, ADD_DECK, ADD_DECK_CARD} from '../actions'
+import { RECEIVE_DECKS, ADD_DECK, ADD_DECK_CARD,REMOVE_DECK} from '../actions'
 
 const decks = (state = {}, action) => {
   switch (action.type) {
@@ -22,6 +22,11 @@ const decks = (state = {}, action) => {
           questions: [...state[deckName].questions].concat(card),
         }
       }
+    case REMOVE_DECK :
+      console.log('action.deckName : ',action.deckName)
+      const {[action.deckName] : value, ...remainingState } = state
+      console.log('..remainingState : ',remainingState)
+      return remainingState
     default :
       return state
   }

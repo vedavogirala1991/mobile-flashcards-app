@@ -37,6 +37,9 @@ class AddDeck extends Component {
     addDeckDetails(deck)
 
     this.toHome()
+    this.setState(()=>({
+      deckName : '',
+    }))
   }
 
 

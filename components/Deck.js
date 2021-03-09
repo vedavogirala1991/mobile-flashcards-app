@@ -3,15 +3,33 @@ import React, {Component} from 'react'
 import { StyleSheet, Text, View, Platform } from 'react-native'
 //React Redux
 import {connect} from 'react-redux'
+import {removeDeck} from '../actions'
+import {removeDeckDetails} from '../utils/api'
 //UI Component
 import TextButton from './TextButton'
 
 class Deck extends Component {
 
+  shouldComponentUpdate(nextProps) {
+    return nextProps.deck !== undefined;
+  }
+  
   toAddCard = (title) => {
-    this.props.navigation.navigate('AddCard',{
-      deck : title
-    })
+    const {goToAddCard} = this.props
+    goToAddCard()
+  }
+
+  removeDk = () => {
+    console.log('removeDeck : ', this.props.deck.title)
+    const {remove, goBack,deck} = this.props
+    remove()
+    goBack()
+    //Route to home
+    removeDeckDetails(deck.title)
+  }
+
+  toHome = () => {
+    this.props.navigation.navigate('Decks')
   }
 
   render () {
@@ -28,7 +46,7 @@ class Deck extends Component {
         <TextButton onPress={console.log('On Press')} style={{margin : 20}}>
           Start Quiz
         </TextButton>
-        <TextButton onPress={console.log('On Press')} style={{margin : 20}}>
+        <TextButton onPress={()=>{this.removeDk()}} style={{margin : 20}}>
           Delete Deck
         </TextButton>
       </View>)
@@ -49,8 +67,19 @@ const mapStateToProps = (decks, {navigation}) => {
   console.log('deck : ',deck)
   console.log('decks[deck] : ',decks[deck])
   return {
-    deck : decks[deck]
+    deck : decks[deck],
+    decks,
   }
 }
 
-export default connect(mapStateToProps)(Deck)
+const mapDispatchToProps = (dispatch, {navigation}) => {
+  const {deck} = navigation.state.params
+  console.log('Deck : : ',deck)
+  return {
+    remove : () => dispatch(removeDeck(deck)),
+    goBack : () => navigation.goBack(),
+    goToAddCard : () => navigation.navigate('AddCard',{deck})
+  }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(Deck)
