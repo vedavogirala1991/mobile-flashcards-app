@@ -1,5 +1,4 @@
 import { AsyncStorage } from 'react-native'
-import {formatDecks} from './helpers'
 
 export const FLASHCARDS_STORAGE_KEY = 'MobileFlashCards:decks'
 
@@ -8,7 +7,7 @@ let decks = {
     title : 'React',
     questions : [
       {
-        question : 'what is React?',
+        question : 'What is React?',
         answer : 'A library for managing user interfaces.'
       },
       {
@@ -21,14 +20,32 @@ let decks = {
     title : 'JavaScript',
     questions : [
       {
-        question : 'what is a closure?',
+        question : 'What is a closure?',
         answer : 'The combination of a function and the lexical environment within which that function was declared.',
+      },
+    ],
+  },
+  Redux: {
+    title: 'Redux',
+    questions: [
+      {
+        question: 'What is Redux?',
+        answer: 'A predictable state container for JavaScript applications.'
+      },
+      {
+        question: 'What is an action creator?',
+        answer:
+          'It is a function that takes an input and returns an object with a type and data property.'
+      },
+      {
+        question: 'What is a reducer?',
+        answer:
+          'A reducer is a pure function that takes the current state and action and returns the next state.'
       },
     ],
   },
 }
 
 export function retrieveDecks () {
-  AsyncStorage.setItem(FLASHCARDS_STORAGE_KEY, JSON.stringify(decks))
   return decks
 }

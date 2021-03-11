@@ -1,6 +1,6 @@
 //Import React and React Native
 import React, {Component} from 'react'
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
+import { StyleSheet, Text, View, TouchableOpacity, AsyncStorage} from 'react-native'
 //React Redux
 import {connect} from 'react-redux'
 //Actions
@@ -8,7 +8,7 @@ import {recieveDecks} from '../actions'
 //App loading
 import AppLoading from 'expo-app-loading'
 //Import Data from api and helper calls
-import {fetchDeckDetails} from '../utils/api'
+import {fetchDeckDetails,storeDeskResults} from '../utils/api'
 import {formDeckOverview, formatDecks} from '../utils/helpers'
 
 class Decks extends Component {
@@ -18,7 +18,7 @@ class Decks extends Component {
 
   componentDidMount () {
     const {dispatch} = this.props
-
+    AsyncStorage.clear().then(console.log('cleared async'))
     fetchDeckDetails()
       .then((decks) => dispatch(recieveDecks(decks)))
       .then(()=>this.setState(() => ({
@@ -34,7 +34,7 @@ class Decks extends Component {
       <AppLoading/>
     }
 
-
+    console.log('Decks --- ',decks)
     return (
       <View style={styles.container}>
         {Object.keys(decks).map((key)=>{
@@ -49,7 +49,7 @@ class Decks extends Component {
               )}>
                 <View>
                   <Text>{deck.title}</Text>
-                  <Text>{deck.questions.length} Cards</Text>
+                  <Text>{deck.questions ? deck.questions.length : 0 } Cards</Text>
                 </View>
               </TouchableOpacity>
             </View>)
