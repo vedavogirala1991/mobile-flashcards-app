@@ -36,13 +36,6 @@ class Quiz extends Component {
         return card
       }),
     }))
-    this.updateScore()
-  }
-
-  updateScore = () => {
-    if((this.state.correct + this.state.incorrect) === this.state.count){
-      this.props.updateScore(correct,incorrect)
-    }
   }
 
   toggleDisplay = (display,index) => {
@@ -57,10 +50,61 @@ class Quiz extends Component {
     }))
   }
 
+  goToDeck = () => {
+    const {navigation,deck} = this.props
+    navigation.navigate('Deck',{deck : deck.title})
+  }
+
+  goToHome = () => {
+    const {navigation} = this.props
+    navigation.navigate('Decks')
+  }
+
+  retakeQuiz = () => {
+    console.log('--- retakeQuiz ---')
+    this.setState(()=>({
+      cards : Array(this.props.deck.questions.length),
+      count : 0,
+      correct : 0,
+      incorrect : 0,
+      score : 0,
+      display : 'cards',
+    }))
+  }
+
   render () {
-    const {correct,incorrect,cards,count} = this.state
-    if(correct+incorrect===count){
-      return <Results/>
+    const {correct,incorrect,cards,count,score,display} = this.state
+
+    if (this.props.deck.questions.length === 0) {
+      return (
+        <View>
+          <View>
+            <Text>
+              You cannot take a quiz because there are no cards in the deck.
+            </Text>
+            <Text>
+              Please add some cards and try again.
+            </Text>
+            <TextButton
+              onPress={() => this.goToDeck()}>
+              Back To Deck
+            </TextButton>
+            <TextButton
+              onPress={() => this.goToHome()}>
+              Home
+            </TextButton>
+          </View>
+        </View>
+      )
+    }
+
+    if(correct+incorrect===count && count!==0) {
+      return <Results
+        deck = {this.props.deck.title}
+        reset = {this.retakeQuiz}
+        correct={correct}
+        count={count}
+        navigation={this.props.navigation}/>
     }
 
     return (
@@ -70,8 +114,7 @@ class Quiz extends Component {
         onMomentumScrollBegin={this.handleScroll}
         ref={scrollView => {
           this.scrollView = scrollView;
-        }}
-      >
+        }}>
         {cards.map((card, index) => (
           <View key={index}>
             <View>
@@ -116,7 +159,10 @@ class Quiz extends Component {
             </View>
           </View>
         ))}
-      </ScrollView>)
+      </ScrollView>
+    )
+
+
   }
 }
 const styles = StyleSheet.create({
