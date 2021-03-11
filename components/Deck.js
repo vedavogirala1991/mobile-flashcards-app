@@ -13,10 +13,15 @@ class Deck extends Component {
   shouldComponentUpdate(nextProps) {
     return nextProps.deck !== undefined;
   }
-  
-  toAddCard = (title) => {
+
+  toAddCard = () => {
     const {goToAddCard} = this.props
     goToAddCard()
+  }
+
+  toQuiz = () => {
+    const {goToQuiz} = this.props
+    goToQuiz()
   }
 
   removeDk = () => {
@@ -40,10 +45,10 @@ class Deck extends Component {
       <View style={styles.container}>
         <Text>{deck.title}</Text>
         <Text>{deck.questions.length} Cards</Text>
-        <TextButton onPress={()=>this.toAddCard(deck.title)} style={{margin : 20}}>
+        <TextButton onPress={()=>this.toAddCard()} style={{margin : 20}}>
           Add Card
         </TextButton>
-        <TextButton onPress={console.log('On Press')} style={{margin : 20}}>
+        <TextButton onPress={()=>this.toQuiz()} style={{margin : 20}}>
           Start Quiz
         </TextButton>
         <TextButton onPress={()=>{this.removeDk()}} style={{margin : 20}}>
@@ -78,6 +83,7 @@ const mapDispatchToProps = (dispatch, {navigation}) => {
   return {
     remove : () => dispatch(removeDeck(deck)),
     goBack : () => navigation.goBack(),
+    goToQuiz : () => navigation.navigate('Quiz',{deck}),
     goToAddCard : () => navigation.navigate('AddCard',{deck})
   }
 }
