@@ -1,10 +1,12 @@
 //Import React and React Native
 import React, {Component} from 'react'
-import { StyleSheet, Text, View, ScrollView } from 'react-native'
+import { StyleSheet, Text, View, ScrollView, Dimensions } from 'react-native'
 import TextButton from './TextButton'
 import Results from './Results'
 import {formatCards} from '../utils/helpers'
 import {connect} from 'react-redux'
+
+const SCREEN_WIDTH = Dimensions.get('window').width;
 
 class Quiz extends Component {
   state = {
@@ -24,6 +26,7 @@ class Quiz extends Component {
     }))
   }
 
+
   answered = (answer,index) => {
     this.setState((state) => ({
       correct : answer==='correct' ? state.correct + 1 : state.correct,
@@ -36,6 +39,7 @@ class Quiz extends Component {
         return card
       }),
     }))
+    this.scrollView.scrollTo({ x: (index + 1) * SCREEN_WIDTH });
   }
 
   toggleDisplay = (display,index) => {
@@ -111,12 +115,11 @@ class Quiz extends Component {
       <ScrollView
         pagingEnabled={true}
         horizontal={true}
-        onMomentumScrollBegin={this.handleScroll}
         ref={scrollView => {
           this.scrollView = scrollView;
         }}>
         {cards.map((card, index) => (
-          <View key={index}>
+          <View style={styles.pageStyle} key={index}>
             <View>
               <Text>
                 {index + 1} / {cards.length}
@@ -172,6 +175,15 @@ const styles = StyleSheet.create({
     alignItems : 'center',
     justifyContent: 'center',
   },
+  pageStyle: {
+    flex: 1,
+    paddingTop: 16,
+    paddingLeft: 16,
+    paddingRight: 16,
+    paddingBottom: 16,
+    justifyContent: 'space-around',
+    width: SCREEN_WIDTH
+  }
 })
 
 const mapStateToProps = (decks,{navigation}) => {
