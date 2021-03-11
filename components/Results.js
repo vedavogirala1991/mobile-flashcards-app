@@ -5,18 +5,8 @@ import TextButton from './TextButton'
 
 class Results extends Component {
 
-  goToDeck = () => {
-    const {navigation,deck} = this.props
-    navigation.navigate('Deck',{deck})
-  }
-
-  goToHome = () => {
-    const {navigation,deck} = this.props
-    navigation.navigate('Decks')
-  }
-
   render () {
-    const {correct,count,navigation,deck,reset} = this.props
+    const {correct,count,reset,back,home} = this.props
     const score = Math.round((correct/count)*100)
     console.log('score - ',score)
 
@@ -28,15 +18,15 @@ class Results extends Component {
         <Text>Scored</Text>
         <Text>{score}</Text>
         <TextButton
-          onPress={() => reset()}>
+          onPress={() => {reset()}}>
           Retake Quiz
         </TextButton>
         <TextButton
-          onPress={() => this.goToDeck()}>
+          onPress={() => {back()}}>
           Back To Deck
         </TextButton>
         <TextButton
-          onPress={() => this.goToHome()}>
+          onPress={() => {home()}}>
           Home
         </TextButton>
       </View>)

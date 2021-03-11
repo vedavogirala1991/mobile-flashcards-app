@@ -56,12 +56,23 @@ class Quiz extends Component {
 
   goToDeck = () => {
     const {navigation,deck} = this.props
+    this.reset()
     navigation.navigate('Deck',{deck : deck.title})
   }
 
   goToHome = () => {
     const {navigation} = this.props
+    this.reset()
     navigation.navigate('Decks')
+  }
+
+  reset = () => {
+    this.setState(()=>({
+      cards : Array(this.props.deck.questions.length),
+      count : 0,
+      correct : 0,
+      incorrect : 0,
+    }))
   }
 
   retakeQuiz = () => {
@@ -71,13 +82,11 @@ class Quiz extends Component {
       count : this.props.deck.questions.length,
       correct : 0,
       incorrect : 0,
-      score : 0,
-      display : 'cards',
     }))
   }
 
   render () {
-    const {correct,incorrect,cards,count,score,display} = this.state
+    const {correct,incorrect,cards,count} = this.state
 
     if (this.props.deck.questions.length === 0) {
       return (
@@ -106,6 +115,8 @@ class Quiz extends Component {
       return <Results
         deck = {this.props.deck.title}
         reset = {this.retakeQuiz}
+        home = {this.goToHome}
+        back= {this.goToDeck}
         correct={correct}
         count={count}
         navigation={this.props.navigation}/>
