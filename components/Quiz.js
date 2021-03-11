@@ -63,7 +63,7 @@ class Quiz extends Component {
   retakeQuiz = () => {
     console.log('--- retakeQuiz ---')
     this.setState(()=>({
-      cards : Array(this.props.deck.questions.length),
+      cards : formatCards(this.props.deck),
       count : 0,
       correct : 0,
       incorrect : 0,
