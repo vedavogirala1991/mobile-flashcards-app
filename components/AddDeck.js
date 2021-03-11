@@ -34,7 +34,7 @@ class AddDeck extends Component {
 
     dispatch(addDeck(deck))
 
-    addDeckDetails(deck)
+    addDeckDetails(deckName)
 
     this.toHome()
     this.setState(()=>({

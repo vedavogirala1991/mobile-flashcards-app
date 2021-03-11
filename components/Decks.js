@@ -8,7 +8,7 @@ import {recieveDecks} from '../actions'
 //App loading
 import AppLoading from 'expo-app-loading'
 //Import Data from api and helper calls
-import {fetchDeckDetails,storeDeskResults} from '../utils/api'
+import {fetchDeckDetails} from '../utils/api'
 import {formDeckOverview, formatDecks} from '../utils/helpers'
 
 class Decks extends Component {
@@ -18,7 +18,7 @@ class Decks extends Component {
 
   componentDidMount () {
     const {dispatch} = this.props
-    AsyncStorage.clear().then(console.log('cleared async'))
+
     fetchDeckDetails()
       .then((decks) => dispatch(recieveDecks(decks)))
       .then(()=>this.setState(() => ({
