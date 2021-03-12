@@ -4,7 +4,7 @@ import { StyleSheet, Text, View, TouchableOpacity, AsyncStorage} from 'react-nat
 //React Redux
 import {connect} from 'react-redux'
 //Actions
-import {recieveDecks} from '../actions'
+import {handleInitialData} from '../actions'
 //App loading
 import AppLoading from 'expo-app-loading'
 //Import Data from api and helper calls
@@ -19,8 +19,7 @@ class Decks extends Component {
   componentDidMount () {
     const {dispatch} = this.props
 
-    fetchDeckDetails()
-      .then((decks) => dispatch(recieveDecks(decks)))
+    dispatch(handleInitialData())
       .then(()=>this.setState(() => ({
           ready : true,
         })))

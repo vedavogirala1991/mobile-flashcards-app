@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
-import { Text, View, StyleSheet } from 'react-native';
-import TextButton from './TextButton';
-import { resetDecks } from '../utils/api.js';
-import { connect } from 'react-redux';
-import { resetStore } from '../actions';
+import React, { Component } from 'react'
+import { Text, View, StyleSheet } from 'react-native'
+import TextButton from './TextButton'
+import { resetDecks } from '../utils/api.js'
+import { connect } from 'react-redux'
+import { resetStore } from '../actions'
 
 class Settings extends Component {
   handleResetDecks = () => {
@@ -45,4 +45,4 @@ const styles = StyleSheet.create({
   },
 })
 
-export default connect(null)(Settings);
+export default connect(null)(Settings)

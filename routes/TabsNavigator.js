@@ -7,6 +7,7 @@ import {createBottomTabNavigator} from 'react-navigation-tabs'
 //Components
 import Decks from '../components/Decks'
 import AddDeck from '../components/AddDeck'
+import Settings from '../components/Settings'
 
 const TabRouteConfigs = {
   Decks : {
@@ -21,6 +22,13 @@ const TabRouteConfigs = {
     navigationOptions : {
       tabBarLabel : 'Add Deck',
       tabBarIcon : ({tintColor}) => <FontAwesome name='plus-square' size={30} color={tintColor}/>
+    }
+  },
+  Settings: {
+    screen: Settings,
+    navigationOptions: {
+      tabBarLabel: 'Settings',
+      tabBarIcon: ({ tintColor }) => <FontAwesome name="sliders" size={30} color={tintColor} />
     }
   },
 }
