@@ -20,8 +20,11 @@ class Decks extends Component {
     const {dispatch} = this.props
 
     fetchDeckDetails()
-    .then((decks) => dispatch(recieveDecks(decks)))
-      .then(()=>this.setState(() => ({
+    .then((decks) => {
+      console.log('New Decks ---',decks)
+      return dispatch(recieveDecks(decks))
+      })
+        .then(()=>this.setState(() => ({
           ready : true,
         })))
   }
