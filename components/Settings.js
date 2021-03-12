@@ -7,7 +7,7 @@ import { resetStore } from '../actions'
 
 class Settings extends Component {
   handleResetDecks = () => {
-    const { resetStore, navigation } = this.props
+    const {navigation } = this.props
 
     resetStore()
 
