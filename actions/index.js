@@ -42,10 +42,10 @@ export const resetStore = () => {
 }
 
 
-export const handleInitialData = () => {
-  return (dispatch) => {
-    return retrieveDecks().then(decks => {
-      dispatch(receiveDecks(decks))
-    })
-  }
-}
+// export const handleInitialData = () => {
+//   return (dispatch) => {
+//     return retrieveDecks().then(decks => {
+//       dispatch(receiveDecks(decks))
+//     })
+//   }
+// }
