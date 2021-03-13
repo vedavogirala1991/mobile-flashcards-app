@@ -1,6 +1,6 @@
 //Import React and React Native
 import React, {Component} from 'react'
-import { StyleSheet, Text, View, ScrollView, Dimensions,TouchableOpacity, TouchableHighlight } from 'react-native'
+import { StyleSheet, Text, View, ScrollView, Dimensions,TouchableOpacity, TouchableHighlight, ImageBackground } from 'react-native'
 import {FontAwesome,Icon} from '@expo/vector-icons'
 import TextButton from './TextButton'
 import Results from './Results'
@@ -8,6 +8,7 @@ import {formatCards,
   setLocalNotification,
   clearLocalNotification} from '../utils/helpers'
 import {connect} from 'react-redux'
+import bgimage3 from '../images/bgimage3.png'
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
 
@@ -141,51 +142,49 @@ class Quiz extends Component {
         }}>
         {cards.map((card, index) => (
           <View style={styles.pageStyle} key={index}>
-            <View style={styles.quizContainer}>
               <View style={styles.cardNumbers}>
                 <Text style={styles.cardNumText}>{index + 1} / {cards.length}</Text>
               </View>
-              <View style={styles.borderline}>
+              <View>
                 <Text style={styles.cardDeckTitle}>{this.props.deck.title}</Text>
               </View>
-            </View>
-            <View style={styles.flipCard}>
+            <View style={styles.deckItem}>
+              <ImageBackground style={styles.orange } source={bgimage3}>
               <View style={styles.cardType}>
-              <Text style={{fontWeight : 'bold',fontSize : 20,color:'#00475b'}}>
-                {card.display === 'question' ? 'Question' : 'Answer'}:
-              </Text>
+                <Text style={{fontWeight : 'bold',fontSize : 20,color:'#fff'}}>
+                  {card.display === 'question' ? 'Question' : 'Answer'}:
+                </Text>
               </View>
               <View style={styles.cardDisplay}>
-                <Text style={{fontWeight : 'bold',fontSize : 20, color:'#02b3e4'}}>
+                <Text style={{fontWeight : 'bold',fontSize : 20, color : '#28034D'}}>
                   {card.display === 'question'
                     ? card.question
                     : card.answer}
                 </Text>
               </View>
-            </View>
-            <View style={styles.toggleFlip}>
               {card.display === 'question'
                 ? (<TouchableOpacity
-                    style={styles.toggleButton}
+                    style={styles.startQuizBtn}
                     onPress={() => this.toggleDisplay('answer',index)}>
-                    <Text style={{color:'#fff',fontWeight:'bold', textDecorationLine: 'underline'}}>Click here to see Answer</Text>
+                    <Text style={styles.quizBtnText}>Click here to see Answer</Text>
                   </TouchableOpacity>)
                 : (<TouchableOpacity
-                    style={styles.toggleButton}
+                    style={styles.startQuizBtn}
                     onPress={() => this.toggleDisplay('question',index)}>
-                    <Text style={{color:'#fff',fontWeight:'bold', textDecorationLine: 'underline'}}>Click here to see Question</Text>
+                    <Text style={styles.quizBtnText}>Click here to see Question</Text>
                   </TouchableOpacity>)}
+                </ImageBackground>
             </View>
             <View>
               <TouchableHighlight
                 style={styles.correctBtn}
                 onPress={() => this.answered('correct', index)}>
-                <View style={styles.iconBtn}><FontAwesome name='check' size={20} color='green' /><Text style={styles.correctText}>CORRECT</Text></View>
+                <View style={styles.iconBtn}><FontAwesome name='check' size={20} color='#fff' /><Text style={styles.correctText}>CORRECT</Text></View>
               </TouchableHighlight>
               <TouchableHighlight
                 style={styles.inCorrectBtn}
                 onPress={() => this.answered('incorrect', index)}>
-                <View style={styles.iconBtn}><FontAwesome name='remove' size={20} color='#d90000' /><Text style={styles.inCorrectText}>INCORRECT</Text></View>
+                <View style={styles.iconBtn}><FontAwesome name='remove' size={20} color='#fff' style={{paddingLeft:5}}/><Text style={styles.inCorrectText}>INCORRECT</Text></View>
               </TouchableHighlight>
             </View>
           </View>
@@ -202,8 +201,43 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems : 'center',
   },
+  borderline : {
+    borderBottomColor: '#fff',
+    borderBottomWidth: 3
+  },
+  deckItem : {
+    backgroundColor : '#ffba3b',
+    height : Platform.OS === 'ios' ? 350 : 400,
+    width : Platform.OS === 'ios' ? 320 : 360,
+    borderBottomLeftRadius: 30,
+    borderBottomRightRadius: 30,
+    borderTopRightRadius: 30,
+    borderTopLeftRadius: 30,
+    marginLeft : 10,
+    marginRight : 10,
+    marginTop : 10,
+    justifyContent : 'center',
+    shadowRadius : 3,
+    shadowOpacity : 0.8,
+    shadowColor : '#666666',
+    shadowOffset : {
+      width : 0,
+      height : 3,
+    },
+  },
+  orange : {
+    marginTop : -10,
+    width : '100%',
+    height : Platform.OS === 'ios' ? 350 : 400,
+    borderBottomLeftRadius: 30,
+    borderBottomRightRadius: 30,
+    borderTopRightRadius: 30,
+    borderTopLeftRadius: 30,
+    overflow : 'hidden',
+  },
   pageStyle: {
     flex: 1,
+    alignItems : 'center',
     paddingLeft: 16,
     paddingRight: 16,
     paddingBottom: 16,
@@ -215,6 +249,17 @@ const styles = StyleSheet.create({
     alignSelf : 'center',
     paddingLeft : 10,
     paddingRight:10,
+  },
+  startQuizBtn : {
+    backgroundColor : '#fff',
+    alignSelf : 'center',
+    width : 250,
+    marginTop : 80,
+    height : 50,
+    borderBottomLeftRadius: 10,
+    borderBottomRightRadius: 10,
+    borderTopRightRadius: 10,
+    borderTopLeftRadius: 10,
   },
   cardNumbers : {
     height : 40,
@@ -234,41 +279,23 @@ const styles = StyleSheet.create({
     alignSelf : 'center',
     fontSize : 20,
     fontWeight : 'bold',
-    color : '#015972',
-    marginTop : 10,
-    paddingLeft : 10,
-    paddingRight:10,
+    color : '#6608c1',
     paddingTop : 10,
     marginBottom : 20,
-  },
-  borderline : {
-    borderBottomColor: '#015972',
-    borderBottomWidth: 3
-  },
-  flipCard : {
-    height : 200,
-    marginTop : 30,
-    paddingTop : 10,
-    borderColor: '#ffba3b',
-    backgroundColor : '#fff',
-    borderTopLeftRadius : 20,
-    borderTopRightRadius : 20,
-    borderWidth : 5,
-  },
-  toggleFlip : {
-    backgroundColor : '#ffba3b',
-    height : 70,
-    padding : 10,
-    marginBottom : 20,
-    borderBottomLeftRadius : 20,
-    borderBottomRightRadius : 20,
   },
   cardType : {
     height : 50,
     padding : 10,
+    marginTop : 20,
+    alignSelf : 'center',
+    borderBottomColor: '#fff',
+    borderBottomWidth: 3
   },
   cardDisplay : {
     alignSelf : 'center',
+    color : '#28034D',
+    marginTop : 30,
+    paddingTop : 30,
     padding : 20,
     margin: 10,
   },
@@ -277,10 +304,10 @@ const styles = StyleSheet.create({
     paddingTop : 15,
   },
   correctBtn : {
-    marginTop : 20,
+    marginTop : 40,
     height : 50,
-    backgroundColor : '#fff',
-    borderColor : 'green',
+    backgroundColor : 'green',
+    borderColor : '#fff',
     borderRadius : 6,
     borderWidth : 2,
   },
@@ -292,7 +319,7 @@ const styles = StyleSheet.create({
     paddingTop : 12,
   },
   correctText : {
-    color : 'green',
+    color : '#fff',
     paddingLeft : 15,
     fontSize : 20,
     fontWeight : 'bold',
@@ -300,13 +327,13 @@ const styles = StyleSheet.create({
   inCorrectBtn : {
     marginTop : 20,
     height : 50,
-    backgroundColor : '#fff',
-    borderColor : '#d90000',
+    backgroundColor : '#d90000',
+    borderColor : '#fff',
     borderRadius : 6,
     borderWidth : 2,
   },
   inCorrectText : {
-    color : '#d90000',
+    color : '#fff',
     paddingLeft : 15,
     fontSize : 20,
     fontWeight : 'bold',
@@ -369,6 +396,11 @@ const styles = StyleSheet.create({
     borderBottomRightRadius: 20,
     borderTopRightRadius: 20,
     borderTopLeftRadius: 20,
+  },
+  quizBtnText : {
+    color : '#333',
+    alignSelf : 'center',
+    padding : 18,
   },
 })
 

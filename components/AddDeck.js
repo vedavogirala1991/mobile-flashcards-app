@@ -62,6 +62,7 @@ class AddDeck extends Component {
             <Text style={styles.deckQText}>What is the title of your new deck?</Text>
             <TextInput
               style={styles.addDeckInput}
+              value={this.state.deckName}
               placeholder = 'Deck Title'
               autoCapitalize = 'none'
               onChangeText = {this.handleDeckName}/>
