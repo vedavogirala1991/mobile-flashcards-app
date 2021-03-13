@@ -2,6 +2,7 @@ import React from 'react'
 //Stack Navigator
 import {createAppContainer} from 'react-navigation'
 import {createStackNavigator} from 'react-navigation-stack'
+import {Ionicons} from '@expo/vector-icons'
 //Components
 import Deck from '../components/Deck'
 import AddCard from '../components/AddCard'
@@ -68,7 +69,7 @@ export default Navigator = createAppContainer(createStackNavigator({
     }
   },
 }, {
-  navigationOptions : {
-    headerShown : false,
-  },
+  navigationOptions: ({navigation}) => ({
+    headerLeft: <Ionicons name="chevron-back-circle" size={24} color="black" nav={navigation}/>,
+  }),
 }))

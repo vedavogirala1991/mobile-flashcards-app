@@ -1,6 +1,7 @@
 //Import React and React Native
 import React, {Component} from 'react'
 import { StyleSheet, Text, View, Platform, ImageBackground,TouchableOpacity} from 'react-native'
+import {Ionicons} from '@expo/vector-icons'
 //React Redux
 import {connect} from 'react-redux'
 import {removeDeck} from '../actions'

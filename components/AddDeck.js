@@ -1,6 +1,6 @@
 //Import React and React Native
 import React, {Component} from 'react'
-import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native'
+import { StyleSheet, Text, View, TextInput, TouchableOpacity, ImageBackground} from 'react-native'
 import {NavigationActions} from 'react-navigation'
 //Add deck details API
 import {addDeckDetails} from '../utils/api'
@@ -12,6 +12,7 @@ import {addDeck} from '../actions'
 import {connect} from 'react-redux'
 //UI components
 import TextButton from './TextButton'
+import doodle2 from '../images/doodle2.png'
 
 class AddDeck extends Component {
   state = {
@@ -52,18 +53,24 @@ class AddDeck extends Component {
 
     return (
       <View style={styles.container}>
-        <Text>What is the title of your new deck</Text>
-        <TextInput
-          style={{ width : 200,height: 40, borderColor: 'gray', borderWidth: 1 }}
-          placeholder = 'Deck Title'
-          placeholderTextColor = '#9a73ef'
-          autoCapitalize = 'none'
-          onChangeText = {this.handleDeckName}/>
-        <TextButton
-          onPress={()=>this.addDeck(deckName)}
-          style={{margin : 20}}>
-          Submit
-        </TextButton>
+        <View style={styles.borderline}>
+          <Text style={styles.title}>Add a new Deck</Text>
+        </View>
+        <View style={styles.deckItem}>
+          <ImageBackground style={styles.orange } source={doodle2}>
+          <Text style={styles.deckQText}>What is the title of your new deck?</Text>
+          <TextInput
+            style={styles.addDeckInput}
+            placeholder = 'Deck Title'
+            autoCapitalize = 'none'
+            onChangeText = {this.handleDeckName}/>
+          </ImageBackground>
+        </View>
+        <View style={styles.addDeckSection}>
+          <TouchableOpacity  onPress={()=>this.addDeck(deckName)}>
+            <Text style={styles.addDeckBtn}>SUBMIT</Text>
+          </TouchableOpacity>
+        </View>
       </View>)
   }
 }
@@ -73,7 +80,89 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
-    justifyContent: 'center',
+  },
+  title : {
+    width: 280,
+    fontSize : 20,
+    fontWeight : 'bold',
+    color : '#6608c1',
+    marginTop : 20,
+    paddingTop : 10,
+    marginBottom : 20,
+  },
+  borderline : {
+    borderBottomColor: '#6608c1',
+    borderBottomWidth: 3
+  },
+  deckItem : {
+    backgroundColor : '#ffba3b',
+    height : 300,
+    width : 320,
+    borderBottomLeftRadius: 30,
+    borderBottomRightRadius: 30,
+    borderTopRightRadius: 30,
+    borderTopLeftRadius: 30,
+    marginLeft : 10,
+    marginRight : 10,
+    marginTop : 50,
+    paddingTop : 10,
+    justifyContent : 'center',
+    shadowRadius : 3,
+    shadowOpacity : 0.8,
+    shadowColor : '#666666',
+    shadowOffset : {
+      width : 0,
+      height : 3,
+    },
+  },
+  orange : {
+    marginTop : -10,
+    width : '100%',
+    height : 300,
+    borderBottomLeftRadius: 30,
+    borderBottomRightRadius: 30,
+    borderTopRightRadius: 30,
+    borderTopLeftRadius: 30,
+    overflow : 'hidden',
+    opacity : 0.9,
+  },
+  deckQText : {
+    color : '#fff',
+    fontSize : 25,
+    fontWeight : 'bold',
+    paddingTop : 60,
+    paddingLeft : 10,
+    marginTop : 20,
+    alignSelf : 'center',
+  },
+  addDeckInput : {
+    width : 200,
+    height: 40,
+    borderColor : '#6608c1',
+    borderWidth : 1,
+    backgroundColor : '#fff',
+    alignSelf : 'center',
+    width : 250,
+    marginTop : 60,
+    borderBottomLeftRadius: 10,
+    borderBottomRightRadius: 10,
+    borderTopRightRadius: 10,
+    borderTopLeftRadius: 10,
+  },
+  addDeckSection : {
+    backgroundColor : '#6608c1',
+    alignSelf : 'center',
+    width : 250,
+    marginTop : 80,
+    borderBottomLeftRadius: 10,
+    borderBottomRightRadius: 10,
+    borderTopRightRadius: 10,
+    borderTopLeftRadius: 10,
+  },
+  addDeckBtn : {
+    color : '#fff',
+    alignSelf : 'center',
+    padding : 18,
   },
 })
 

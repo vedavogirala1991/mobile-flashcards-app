@@ -47,7 +47,7 @@ class Decks extends Component {
     return (
       <View style={styles.container}>
         <View style={styles.borderline}>
-        <Text style={styles.title}>Decks</Text>
+          <Text style={styles.title}>Decks</Text>
         </View>
         {Object.keys(decks).map((key)=>{
 
@@ -85,7 +85,7 @@ const styles = StyleSheet.create({
     width: 280,
     fontSize : 20,
     fontWeight : 'bold',
-    color : '#540b80',
+    color : '#6608c1',
     marginTop : 20,
     paddingTop : 10,
     marginBottom : 20,
@@ -134,7 +134,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   borderline : {
-    borderBottomColor: '#540b80',
+    borderBottomColor: '#6608c1',
     borderBottomWidth: 3
   }
 })
