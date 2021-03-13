@@ -73,7 +73,16 @@ export default Navigator = createAppContainer(createStackNavigator({
       headerShown : true,
       headerTintColor : '#333333',
       headerStyle : {
+        height : 60,
         backgroundColor : '#ffffff',
+        borderBottomColor : '#f8f8f8',
+        shadowRadius : 3,
+        shadowOpacity : 0.8,
+        shadowColor : 'rgba(0,0,0,0.24)',
+        shadowOffset : {
+          width : 0,
+          height : 3,
+        }
       }
     }
   },

@@ -1,6 +1,7 @@
 //Import React and React Native
 import React, {Component} from 'react'
-import { StyleSheet, Text, View, ScrollView, Dimensions } from 'react-native'
+import { StyleSheet, Text, View, ScrollView, Dimensions,TouchableOpacity, TouchableHighlight } from 'react-native'
+import {FontAwesome,Icon} from '@expo/vector-icons'
 import TextButton from './TextButton'
 import Results from './Results'
 import {formatCards,
@@ -134,45 +135,52 @@ class Quiz extends Component {
         }}>
         {cards.map((card, index) => (
           <View style={styles.pageStyle} key={index}>
-            <View>
-              <Text>
-                {index + 1} / {cards.length}
-              </Text>
+            <View style={styles.quizContainer}>
+              <View style={styles.cardNumbers}>
+                <Text style={styles.cardNumText}>{index + 1} / {cards.length}</Text>
+              </View>
+              <View style={styles.borderline}>
+                <Text style={styles.cardDeckTitle}>{this.props.deck.title}</Text>
+              </View>
             </View>
-            <View>
-              <Text>
-                {card.display === 'question' ? 'Question' : 'Answer'}
+            <View style={styles.flipCard}>
+              <View style={styles.cardType}>
+              <Text style={{fontWeight : 'bold',fontSize : 20,color:'#00475b'}}>
+                {card.display === 'question' ? 'Question' : 'Answer'}:
               </Text>
-              <View>
-                <Text>
+              </View>
+              <View style={styles.cardDisplay}>
+                <Text style={{fontWeight : 'bold',fontSize : 20, color:'#02b3e4'}}>
                   {card.display === 'question'
                     ? card.question
                     : card.answer}
                 </Text>
               </View>
             </View>
-            {card.display === 'question'
-            ? (<TextButton
-                style={{ color: 'red' }}
-                onPress={() => this.toggleDisplay('answer',index)}>
-                Show Answer
-              </TextButton>)
-            : (<TextButton
-                style={{ color: 'red' }}
-                onPress={() => this.toggleDisplay('question',index)}>
-                Show Question
-              </TextButton>)}
+            <View style={styles.toggleFlip}>
+              {card.display === 'question'
+                ? (<TouchableOpacity
+                    style={styles.toggleButton}
+                    onPress={() => this.toggleDisplay('answer',index)}>
+                    <Text style={{color:'#fff',fontWeight:'bold', textDecorationLine: 'underline'}}>Click here to see Answer</Text>
+                  </TouchableOpacity>)
+                : (<TouchableOpacity
+                    style={styles.toggleButton}
+                    onPress={() => this.toggleDisplay('question',index)}>
+                    <Text style={{color:'#fff',fontWeight:'bold', textDecorationLine: 'underline'}}>Click here to see Question</Text>
+                  </TouchableOpacity>)}
+            </View>
             <View>
-              <TextButton
-                style={{ backgroundColor: 'green', borderColor: 'white' }}
+              <TouchableHighlight
+                style={styles.correctBtn}
                 onPress={() => this.answered('correct', index)}>
-                Correct
-              </TextButton>
-              <TextButton
-                style={{ backgroundColor: 'red', borderColor: 'white' }}
+                <View style={styles.iconBtn}><FontAwesome name='check' size={20} color='green' /><Text style={styles.correctText}>CORRECT</Text></View>
+              </TouchableHighlight>
+              <TouchableHighlight
+                style={styles.inCorrectBtn}
                 onPress={() => this.answered('incorrect', index)}>
-                Incorrect
-              </TextButton>
+                <View style={styles.iconBtn}><FontAwesome name='remove' size={20} color='#d90000' /><Text style={styles.inCorrectText}>INCORRECT</Text></View>
+              </TouchableHighlight>
             </View>
           </View>
         ))}
@@ -187,17 +195,118 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
     alignItems : 'center',
-    justifyContent: 'center',
   },
   pageStyle: {
     flex: 1,
-    paddingTop: 16,
     paddingLeft: 16,
     paddingRight: 16,
     paddingBottom: 16,
-    justifyContent: 'space-around',
+    paddingTop: 16,
+    backgroundColor : '#fff',
     width: SCREEN_WIDTH
-  }
+  },
+  quizContainer : {
+    alignSelf : 'center',
+    paddingLeft : 10,
+    paddingRight:10,
+  },
+  cardNumbers : {
+    height : 40,
+    width : 40,
+    marginLeft : 10,
+    marginRight:10,
+    borderRadius : 20,
+    backgroundColor : '#c6c6c6',
+  },
+  cardNumText : {
+    color : '#fff',
+    paddingTop : 12,
+    paddingLeft : 8,
+    fontWeight : 'bold',
+  },
+  cardDeckTitle : {
+    alignSelf : 'center',
+    fontSize : 20,
+    fontWeight : 'bold',
+    color : '#015972',
+    marginTop : 10,
+    paddingLeft : 10,
+    paddingRight:10,
+    paddingTop : 10,
+    marginBottom : 20,
+  },
+  borderline : {
+    borderBottomColor: '#015972',
+    borderBottomWidth: 3
+  },
+  flipCard : {
+    height : 200,
+    marginTop : 30,
+    paddingTop : 10,
+    borderColor: '#ffba3b',
+    backgroundColor : '#fff',
+    borderTopLeftRadius : 20,
+    borderTopRightRadius : 20,
+    borderWidth : 5,
+  },
+  toggleFlip : {
+    backgroundColor : '#ffba3b',
+    height : 70,
+    padding : 10,
+    marginBottom : 20,
+    borderBottomLeftRadius : 20,
+    borderBottomRightRadius : 20,
+  },
+  cardType : {
+    height : 50,
+    padding : 10,
+  },
+  cardDisplay : {
+    alignSelf : 'center',
+    padding : 20,
+    margin: 10,
+  },
+  toggleButton : {
+    alignSelf : 'center',
+    paddingTop : 15,
+  },
+  correctBtn : {
+    marginTop : 20,
+    height : 50,
+    backgroundColor : '#fff',
+    borderColor : 'green',
+    borderRadius : 6,
+    borderWidth : 2,
+  },
+  iconBtn : {
+    flexDirection : 'row',
+    alignItems : 'center',
+    alignSelf: 'center',
+    padding : 5,
+    paddingTop : 12,
+  },
+  correctText : {
+    color : 'green',
+    paddingLeft : 15,
+    fontSize : 20,
+    fontWeight : 'bold',
+  },
+  inCorrectBtn : {
+    marginTop : 20,
+    height : 50,
+    backgroundColor : '#fff',
+    borderColor : '#d90000',
+    borderRadius : 6,
+    borderWidth : 2,
+  },
+  inCorrectText : {
+    color : '#d90000',
+    paddingLeft : 15,
+    fontSize : 20,
+    fontWeight : 'bold',
+  },
+
+
 })
 
 const mapStateToProps = (decks,{navigation}) => {
