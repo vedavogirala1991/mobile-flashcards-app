@@ -1,6 +1,6 @@
 //Import React and React Native
 import React, {Component} from 'react'
-import { StyleSheet, Text, View, TouchableOpacity, AsyncStorage, ImageBackground} from 'react-native'
+import { StyleSheet, Text, View, TouchableOpacity, AsyncStorage, ImageBackground, ScrollView} from 'react-native'
 import {Fontisto} from '@expo/vector-icons'
 //React Redux
 import {connect} from 'react-redux'
@@ -45,6 +45,7 @@ class Decks extends Component {
     }
 
     return (
+      <ScrollView>
       <View style={styles.container}>
         <View style={styles.borderline}>
           <Text style={styles.title}>Decks</Text>
@@ -56,7 +57,7 @@ class Decks extends Component {
           return (
             <View key={deck.title} style={styles.item}>
               <ImageBackground  style= { styles.backgroundImage } source={doodle}>
-              <Fontisto name='favorite' size={30} color={'#fff'} style={styles.favorite}/>
+              <Fontisto name='favorite' size={30} color={'#C19CE6'} style={styles.favorite}/>
               <TouchableOpacity onPress={() => this.props.navigation.navigate(
                 'Deck',
                 {deck : deck.title}
@@ -70,6 +71,7 @@ class Decks extends Component {
             </View>)
         })}
       </View>
+      </ScrollView>
     )
   }
 }

@@ -62,6 +62,7 @@ class AddCard extends Component {
     const {question,answer} = this.state
 
     return (
+      <ScrollView>
         <View  style={styles.container}>
             <View style={styles.borderline}>
               <Text style={styles.title}>Add a Card for your Deck</Text>
@@ -95,7 +96,8 @@ class AddCard extends Component {
               <Text style={styles.addCardBtn}>SUBMIT</Text>
             </TouchableOpacity>
           </View>
-        </View>)
+        </View>
+      </ScrollView>)
   }
 }
 

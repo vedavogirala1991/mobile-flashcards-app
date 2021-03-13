@@ -47,17 +47,15 @@ export const addDeckDetails = async (deckName) => {
 }
 
 export const addDeckCardDetails = async (deckName,card) => {
-  const deck = fetchDeck(deckName)
-  console.log('addDeckCardDetails : deck : ',deck)
+  const deck = await fetchDeck(deckName)
+
   try {
     await AsyncStorage.mergeItem(FLASHCARDS_STORAGE_KEY,
      JSON.stringify({
        [deckName] : {
-         questions : [deck.questions].concat(card)
+         questions : [...deck.questions].concat(card)
        }
      }))
-    const decks = await AsyncStorage.getItem(FLASHCARDS_STORAGE_KEY)
-    console.log('addDeckCardDetails : cards : ',JSON.parse(decks))
   }
   catch (err) {
     console.log('Error while saving a card to deck - ',err)

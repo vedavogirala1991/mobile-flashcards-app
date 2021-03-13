@@ -1,6 +1,6 @@
 //Import React and React Native
 import React, {Component} from 'react'
-import { StyleSheet, Text, View, TextInput, TouchableOpacity, ImageBackground, Platform} from 'react-native'
+import { StyleSheet, Text, View, TextInput, TouchableOpacity, ImageBackground, Platform,ScrollView} from 'react-native'
 import {NavigationActions} from 'react-navigation'
 //Add deck details API
 import {addDeckDetails} from '../utils/api'
@@ -52,26 +52,28 @@ class AddDeck extends Component {
     const {deckName} = this.state
 
     return (
-      <View style={styles.container}>
-        <View style={styles.borderline}>
-          <Text style={styles.title}>Add a new Deck</Text>
+      <ScrollView>
+        <View style={styles.container}>
+          <View style={styles.borderline}>
+            <Text style={styles.title}>Add a new Deck</Text>
+          </View>
+          <View style={styles.deckItem}>
+            <ImageBackground style={styles.orange } source={doodle2}>
+            <Text style={styles.deckQText}>What is the title of your new deck?</Text>
+            <TextInput
+              style={styles.addDeckInput}
+              placeholder = 'Deck Title'
+              autoCapitalize = 'none'
+              onChangeText = {this.handleDeckName}/>
+            </ImageBackground>
+          </View>
+          <View style={styles.addDeckSection}>
+            <TouchableOpacity  onPress={()=>this.addDeck(deckName)}>
+              <Text style={styles.addDeckBtn}>SUBMIT</Text>
+            </TouchableOpacity>
+          </View>
         </View>
-        <View style={styles.deckItem}>
-          <ImageBackground style={styles.orange } source={doodle2}>
-          <Text style={styles.deckQText}>What is the title of your new deck?</Text>
-          <TextInput
-            style={styles.addDeckInput}
-            placeholder = 'Deck Title'
-            autoCapitalize = 'none'
-            onChangeText = {this.handleDeckName}/>
-          </ImageBackground>
-        </View>
-        <View style={styles.addDeckSection}>
-          <TouchableOpacity  onPress={()=>this.addDeck(deckName)}>
-            <Text style={styles.addDeckBtn}>SUBMIT</Text>
-          </TouchableOpacity>
-        </View>
-      </View>)
+      </ScrollView>)
   }
 }
 
@@ -80,6 +82,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
+    height : '100%'
   },
   title : {
     width: 280,
@@ -124,10 +127,10 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 30,
     borderTopLeftRadius: 30,
     overflow : 'hidden',
-    opacity : 0.9,
+    opacity : 0.6,
   },
   deckQText : {
-    color : '#fff',
+    color : '#28034D',
     fontSize : 25,
     fontWeight : 'bold',
     paddingTop : 60,
@@ -154,6 +157,7 @@ const styles = StyleSheet.create({
     alignSelf : 'center',
     width : 250,
     marginTop : 80,
+    marginBottom : 80,
     borderBottomLeftRadius: 10,
     borderBottomRightRadius: 10,
     borderTopRightRadius: 10,

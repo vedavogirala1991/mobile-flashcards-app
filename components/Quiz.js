@@ -93,22 +93,28 @@ class Quiz extends Component {
     if (this.props.deck.questions.length === 0) {
       return (
         <View>
-          <View>
-            <Text>
-              You cannot take a quiz because there are no cards in the deck.
+          <View style={{alignItems : 'center',marginTop : 50}}>
+            <Text style={styles.noCardTitle}>
+              Oops no cards on deck!!
             </Text>
-            <Text>
-              Please add some cards and try again.
-            </Text>
-            <TextButton
-              onPress={() => this.goToDeck()}>
-              Back To Deck
-            </TextButton>
-            <TextButton
-              onPress={() => this.goToHome()}>
-              Home
-            </TextButton>
+            <View style={styles.noCardInfoSection}>
+              <FontAwesome name='warning' size={24} color='#ffbf00' style={{paddingLeft : 10,}}/>
+              <Text style={styles.noCardInfo}>
+                You cannot take a quiz because there are no cards in the deck.
+                Please add some cards and try again.
+              </Text>
+            </View>
           </View>
+          <View style={styles.backToDeckSection}>
+            <TouchableOpacity
+              onPress={() => {this.goToDeck()}}>
+              <Text style={styles.backToDeckBtn}>BACK TO DECK</Text>
+            </TouchableOpacity>
+          </View>
+          <TouchableOpacity  style={styles.homeBtn}
+            onPress={() => {this.goToHome()}}>
+            <Text style={styles.homeBtnTxt}>HOME</Text>
+          </TouchableOpacity>
         </View>
       )
     }
@@ -305,8 +311,65 @@ const styles = StyleSheet.create({
     fontSize : 20,
     fontWeight : 'bold',
   },
-
-
+  backToDeckSection : {
+    backgroundColor : '#6608c1',
+    alignSelf : 'center',
+    width : 250,
+    marginTop : 40,
+    borderBottomLeftRadius: 10,
+    borderBottomRightRadius: 10,
+    borderTopRightRadius: 10,
+    borderTopLeftRadius: 10,
+  },
+  backToDeckBtn : {
+    color : '#fff',
+    alignSelf : 'center',
+    padding : 18,
+  },
+  homeBtn : {
+    width : 250,
+    alignItems : 'center',
+    alignSelf : 'center',
+    marginTop : 50,
+    borderColor : '#6608c1',
+    borderWidth : 2,
+    borderBottomLeftRadius: 10,
+    borderBottomRightRadius: 10,
+    borderTopRightRadius: 10,
+    borderTopLeftRadius: 10,
+  },
+  homeBtnTxt : {
+    color : '#6608c1',
+    padding : 18,
+  },
+  noCardTitle : {
+    fontWeight : 'bold',
+    fontSize : 20,
+    color : '#ce3e86',
+  },
+  noCardInfo : {
+    fontSize : 16,
+    color : '#fff',
+    paddingLeft : 20,
+  },
+  noCardInfoSection : {
+    flexDirection : 'row',
+    alignItems : 'center',
+    justifyContent : 'center',
+    marginTop : 50,
+    marginLeft : 20,
+    paddingLeft : 20,
+    paddingRight : 20,
+    marginRight : 20,
+    height : 100,
+    backgroundColor: '#474747',
+    borderWidth : 2,
+    borderColor : '#474747',
+    borderBottomLeftRadius: 20,
+    borderBottomRightRadius: 20,
+    borderTopRightRadius: 20,
+    borderTopLeftRadius: 20,
+  },
 })
 
 const mapStateToProps = (decks,{navigation}) => {
