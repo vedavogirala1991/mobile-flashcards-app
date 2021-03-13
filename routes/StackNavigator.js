@@ -13,18 +13,37 @@ export default Navigator = createAppContainer(createStackNavigator({
     screen : Tabs,
     navigationOptions : {
       headerShown : true,
-      headerTintColor : 'white',
+      headerTintColor : '#333333',
       headerStyle : {
-        backgroundColor : '#292477',
+        height : 60,
+        backgroundColor : '#ffffff',
+        borderBottomColor : '#f8f8f8',
+        shadowRadius : 3,
+        shadowOpacity : 0.8,
+        shadowColor : 'rgba(0,0,0,0.24)',
+        shadowOffset : {
+          width : 0,
+          height : 3,
+        }
       }
     }
   },
   Deck : {
     screen : Deck,
     navigationOptions : {
-      headerTintColor : 'white',
+      headerShown : true,
+      headerTintColor : '#333333',
       headerStyle : {
-        backgroundColor : '#292477',
+        height : 60,
+        backgroundColor : '#ffffff',
+        borderBottomColor : '#f8f8f8',
+        shadowRadius : 3,
+        shadowOpacity : 0.8,
+        shadowColor : 'rgba(0,0,0,0.24)',
+        shadowOffset : {
+          width : 0,
+          height : 3,
+        }
       }
     }
   },
@@ -34,7 +53,7 @@ export default Navigator = createAppContainer(createStackNavigator({
       headerShown : true,
       headerTintColor : 'white',
       headerStyle : {
-        backgroundColor : '#292477',
+        backgroundColor : '#ffffff',
       }
     }
   },
@@ -42,9 +61,9 @@ export default Navigator = createAppContainer(createStackNavigator({
     screen : Quiz,
     navigationOptions : {
       headerShown : true,
-      headerTintColor : 'white',
+      headerTintColor : '#333333',
       headerStyle : {
-        backgroundColor : '#292477',
+        backgroundColor : '#ffffff',
       }
     }
   },

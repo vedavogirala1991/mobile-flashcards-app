@@ -1,7 +1,7 @@
 import React from 'react'
 import {Platform} from 'react-native'
 //Icons
-import {Ionicons, FontAwesome} from '@expo/vector-icons'
+import {MaterialCommunityIcons, FontAwesome5} from '@expo/vector-icons'
 //Tab Navigation
 import {createBottomTabNavigator} from 'react-navigation-tabs'
 //Components
@@ -13,27 +13,27 @@ const TabRouteConfigs = {
     screen : Decks,
     navigationOptions : {
       tabBarLabel : 'Decks',
-      tabBarIcon : ({tintColor}) => <Ionicons name='ios-bookmarks' size={30} color={tintColor}/>
+      tabBarIcon : ({tintColor}) => <FontAwesome5 name='boxes' size={30} color={tintColor}/>
     }
   },
   AddDeck : {
     screen : AddDeck,
     navigationOptions : {
       tabBarLabel : 'Add Deck',
-      tabBarIcon : ({tintColor}) => <FontAwesome name='plus-square' size={30} color={tintColor}/>
+      tabBarIcon : ({tintColor}) => <MaterialCommunityIcons name='book-plus-multiple' size={30} color={tintColor}/>
     }
   },
 }
 
 const TabNavigatorConfig = {
   navigationOptions : {
-    headerShown : false,
+    headerShown : true,
   },
   tabBarOptions : {
-    activeTintColor : Platform.OS === 'ios' ? '#292477' : 'white',
+    activeTintColor : 'white',
     style : {
-      height : 56,
-      backgroundColor : Platform.OS === 'ios' ? 'white' : '#292477',
+      height : Platform.OS === 'ios' ? 56 : 100,
+      backgroundColor : '#333333',
       shadowColor : 'rgba(0,0,0,0.24)',
       shadowOffset : {
         width : 0,

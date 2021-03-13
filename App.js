@@ -28,7 +28,7 @@ class App extends Component {
     return (
       <Provider store={createStore(reducer)}>
         <View style={styles.container}>
-          <FlashCardsStatusBar backgroundColor={'#292477'} barStyle='light-content' />
+          <FlashCardsStatusBar backgroundColor={'#333333'} barStyle='light-content' />
           <Navigator/>
         </View>
       </Provider>
