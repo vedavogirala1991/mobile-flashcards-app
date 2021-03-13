@@ -1,6 +1,6 @@
 //Import React and React Native
 import React, {Component} from 'react'
-import { StyleSheet, Text, View, TextInput, TouchableOpacity, ImageBackground} from 'react-native'
+import { StyleSheet, Text, View, TextInput, TouchableOpacity, ImageBackground, Platform} from 'react-native'
 import {NavigationActions} from 'react-navigation'
 //Add deck details API
 import {addDeckDetails} from '../utils/api'
@@ -96,8 +96,8 @@ const styles = StyleSheet.create({
   },
   deckItem : {
     backgroundColor : '#ffba3b',
-    height : 300,
-    width : 320,
+    height : Platform.OS === 'ios' ? 300 : 340,
+    width : Platform.OS === 'ios' ? 320 : 360,
     borderBottomLeftRadius: 30,
     borderBottomRightRadius: 30,
     borderTopRightRadius: 30,
@@ -118,7 +118,7 @@ const styles = StyleSheet.create({
   orange : {
     marginTop : -10,
     width : '100%',
-    height : 300,
+    height : Platform.OS === 'ios' ? 300 : 340,
     borderBottomLeftRadius: 30,
     borderBottomRightRadius: 30,
     borderTopRightRadius: 30,
