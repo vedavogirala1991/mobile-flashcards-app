@@ -17,6 +17,11 @@ class AddDeck extends Component {
   state = {
     deckName : '',
   }
+  componentDidMount() {
+    this.setState(()=>({
+      deckName : '',
+    }))
+  }
   handleDeckName = (text) => {
     this.setState(()=> ({
       deckName : text,
@@ -31,15 +36,14 @@ class AddDeck extends Component {
     const {dispatch} = this.props
 
     const deck = formatDeck(deckName)
-
+    this.setState(()=>({
+      deckName : '',
+    }))
     dispatch(addDeck(deck))
 
     addDeckDetails(deckName)
 
     this.toHome()
-    this.setState(()=>({
-      deckName : '',
-    }))
   }
 
 
@@ -48,10 +52,10 @@ class AddDeck extends Component {
 
     return (
       <View style={styles.container}>
-        <Text>Enter the Deck Name</Text>
+        <Text>What is the title of your new deck</Text>
         <TextInput
           style={{ width : 200,height: 40, borderColor: 'gray', borderWidth: 1 }}
-          placeholder = 'Deck Name'
+          placeholder = 'Deck Title'
           placeholderTextColor = '#9a73ef'
           autoCapitalize = 'none'
           onChangeText = {this.handleDeckName}/>

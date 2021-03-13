@@ -13,7 +13,6 @@ export const recieveDecks = (decks) => {
 }
 
 export const addDeck = (deck) => {
-  console.log('Actions deck : ',deck)
   return {
     type: ADD_DECK,
     deck,
@@ -34,13 +33,6 @@ export const removeDeck = (deckName) => {
     deckName,
   }
 }
-
-export const resetStore = () => {
-  return {
-    type: RESET_DECKS,
-  }
-}
-
 
 // export const handleInitialData = () => {
 //   return (dispatch) => {

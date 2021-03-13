@@ -1,6 +1,6 @@
 //Import React and React Native
 import React, {Component} from 'react'
-import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native'
+import { ScrollView, StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native'
 //React Redux
 import {connect} from 'react-redux'
 import {addDeckCard} from '../actions'
@@ -39,7 +39,7 @@ class AddCard extends Component {
 
     dispatch(addDeckCard(deckName,card))
 
-    addDeckCardDetails(deckName,card,this.props.decks)
+    addDeckCardDetails(deckName,card)
 
     this.setState(()=>({
       question : '',
@@ -58,31 +58,35 @@ class AddCard extends Component {
 
   render () {
     const {deckName} = this.props
-    console.log('Deck Name : ',deckName)
     const {question,answer} = this.state
 
-    console.log('Deck question : ',question)
-    console.log('Deck answer : ',answer)
-
     return (
-      <View style={styles.container}>
-        <Text>Enter Flash cards details</Text>
-        <TextInput
-          style={{ width : 200,height: 40, borderColor: 'gray', borderWidth: 1 }}
-          placeholder = 'Question'
-          placeholderTextColor = '#9a73ef'
-          autoCapitalize = 'none'
-          onChangeText = {this.handleQuestion}/>
-        <TextInput
-          style={{ width : 200,height: 40, borderColor: 'gray', borderWidth: 1 }}
-          placeholder = 'Answer'
-          placeholderTextColor = '#9a73ef'
-          autoCapitalize = 'none'
-          onChangeText = {this.handleAnswer}/>
-        <TextButton onPress={this.addDeckCard} style={{margin : 20}}>
-          Submit
-        </TextButton>
-      </View>)
+        <View  style={styles.container}>
+          <Text>Enter Flash cards details</Text>
+          <TextInput
+            style={{ width : 200,height: 40, borderColor: 'gray', borderWidth: 1 }}
+            placeholder = 'Question'
+            value={this.state.question}
+            autoCapitalize = 'none'
+            autoFocus={true}
+            onSubmitEditing={() => this.answerTextInput.focus()}
+            blurOnSubmit={false}
+            onChangeText = {this.handleQuestion}/>
+          <TextInput
+            style={{ width : 200,height: 40, borderColor: 'gray', borderWidth: 1 }}
+            placeholder = 'Answer'
+            autoCapitalize = 'none'
+            ref={input => {
+                  this.answerTextInput = input;
+                }}
+            onChangeText = {this.handleAnswer}/>
+          <TextButton
+            onPress={this.addDeckCard}
+            disabled={this.state.question === '' || this.state.answer === ''}
+            style={{margin : 20}}>
+            Submit
+          </TextButton>
+        </View>)
   }
 }
 
@@ -91,7 +95,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent : 'center',
   },
 })
 

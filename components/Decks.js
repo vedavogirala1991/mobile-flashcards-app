@@ -17,16 +17,21 @@ class Decks extends Component {
   }
 
   componentDidMount () {
+
     const {dispatch} = this.props
 
     fetchDeckDetails()
-    .then((decks) => {
-      console.log('New Decks ---',decks)
-      return dispatch(recieveDecks(decks))
+      .then((decks) => {
+        return dispatch(recieveDecks(decks))
       })
-        .then(()=>this.setState(() => ({
-          ready : true,
-        })))
+        .then((decks)=>
+          {
+            if(decks){
+              this.setState(() => ({
+                ready : true,
+              }))
+            }
+          })
   }
 
   render () {
@@ -37,7 +42,6 @@ class Decks extends Component {
       <AppLoading/>
     }
 
-    console.log('Decks --- ',decks)
     return (
       <View style={styles.container}>
         {Object.keys(decks).map((key)=>{
@@ -45,7 +49,7 @@ class Decks extends Component {
           const deck = decks[key]
 
           return (
-            <View key={deck.title}>
+            <View key={deck.title} style={styles.item}>
               <TouchableOpacity onPress={() => this.props.navigation.navigate(
                 'Deck',
                 {deck : deck.title}
@@ -69,6 +73,22 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  item : {
+    backgroundColor : 'white',
+    borderRadius : Platform.OS === 'ios' ? 10 : 8,
+    padding : 20,
+    marginLeft : 10,
+    marginRight : 10,
+    marginTop : 17,
+    justifyContent : 'center',
+    shadowRadius : 3,
+    shadowOpacity : 0.8,
+    shadowColor : 'rgba(0,0,0,0.24)',
+    shadowOffset : {
+      width : 0,
+      height : 3,
+    },
   },
 })
 

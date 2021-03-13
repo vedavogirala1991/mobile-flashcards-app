@@ -9,6 +9,7 @@ import {Provider} from 'react-redux'
 import Constants from 'expo-constants'
 //App Navigation
 import Navigator from './routes/StackNavigator'
+import {setLocalNotification} from './utils/helpers'
 
 const FlashCardsStatusBar = ({backgroundColor,...props}) => {
   return (
@@ -19,6 +20,9 @@ const FlashCardsStatusBar = ({backgroundColor,...props}) => {
 }
 
 class App extends Component {
+  componentDidMount () {
+    setLocalNotification()
+  }
 
   render () {
     return (

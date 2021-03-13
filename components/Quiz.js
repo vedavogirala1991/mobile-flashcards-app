@@ -3,7 +3,9 @@ import React, {Component} from 'react'
 import { StyleSheet, Text, View, ScrollView, Dimensions } from 'react-native'
 import TextButton from './TextButton'
 import Results from './Results'
-import {formatCards} from '../utils/helpers'
+import {formatCards,
+  setLocalNotification,
+  clearLocalNotification} from '../utils/helpers'
 import {connect} from 'react-redux'
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
@@ -76,7 +78,6 @@ class Quiz extends Component {
   }
 
   retakeQuiz = () => {
-    console.log('--- retakeQuiz ---')
     this.setState(()=>({
       cards : formatCards(this.props.deck),
       count : this.props.deck.questions.length,
@@ -112,6 +113,8 @@ class Quiz extends Component {
     }
 
     if(correct+incorrect===count && count!==0) {
+      clearLocalNotification()
+      .then(setLocalNotification())
       return <Results
         deck = {this.props.deck.title}
         reset = {this.retakeQuiz}

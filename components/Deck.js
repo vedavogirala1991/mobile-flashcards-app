@@ -25,7 +25,6 @@ class Deck extends Component {
   }
 
   removeDk = () => {
-    console.log('removeDeck : ', this.props.deck.title)
     const {remove, goBack,deck} = this.props
     remove()
     goBack()
@@ -39,7 +38,6 @@ class Deck extends Component {
 
   render () {
     const {deck} = this.props
-    console.log('Deck --- ',deck)
 
     return (
       <View style={styles.container}>
@@ -69,8 +67,6 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = (decks, {navigation}) => {
   const {deck} = navigation.state.params
-  console.log('deck : ',deck)
-  console.log('decks[deck] : ',decks[deck])
   return {
     deck : decks[deck],
     decks,
@@ -79,7 +75,7 @@ const mapStateToProps = (decks, {navigation}) => {
 
 const mapDispatchToProps = (dispatch, {navigation}) => {
   const {deck} = navigation.state.params
-  console.log('Deck : : ',deck)
+
   return {
     remove : () => dispatch(removeDeck(deck)),
     goBack : () => navigation.goBack(),

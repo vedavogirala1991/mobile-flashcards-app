@@ -8,7 +8,6 @@ class Results extends Component {
   render () {
     const {correct,count,reset,back,home} = this.props
     const score = Math.round((correct/count)*100)
-    console.log('score - ',score)
 
     return (
       <View style={styles.container}>
