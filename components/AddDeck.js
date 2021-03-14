@@ -29,8 +29,10 @@ class AddDeck extends Component {
     }))
   }
 
-  toHome = () => {
-    this.props.navigation.navigate('Decks')
+  toDeck = (deckName) => {
+    this.props.navigation.navigate('Deck',{
+      deck : deckName
+    })
   }
 
   addDeck = (deckName) => {
@@ -44,7 +46,7 @@ class AddDeck extends Component {
 
     addDeckDetails(deckName)
 
-    this.toHome()
+    this.toDeck(deckName)
   }
 
 
@@ -69,7 +71,9 @@ class AddDeck extends Component {
             </ImageBackground>
           </View>
           <View style={styles.addDeckSection}>
-            <TouchableOpacity  onPress={()=>this.addDeck(deckName)}>
+            <TouchableOpacity
+              disabled = {this.state.deckName === ''}
+              onPress={()=>this.addDeck(deckName)}>
               <Text style={styles.addDeckBtn}>SUBMIT</Text>
             </TouchableOpacity>
           </View>
