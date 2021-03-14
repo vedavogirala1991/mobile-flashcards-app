@@ -6,6 +6,15 @@ Mobile Flashcards App - a React Native app for iOS and Android that allows users
 
 # App Pages
 
+![image](https://user-images.githubusercontent.com/75567125/111061004-08725100-84c7-11eb-8767-5b0daece77ab.png)
+![image](https://user-images.githubusercontent.com/75567125/111061035-32c40e80-84c7-11eb-8f54-4f5e9f8a5865.png)
+![image](https://user-images.githubusercontent.com/75567125/111061048-3eafd080-84c7-11eb-88b0-20383cd14fce.png)
+![image](https://user-images.githubusercontent.com/75567125/111061055-50917380-84c7-11eb-8cfe-dbd5cd43ec56.png)
+![image](https://user-images.githubusercontent.com/75567125/111061075-643cda00-84c7-11eb-8dbe-15d54964bb76.png)
+![image](https://user-images.githubusercontent.com/75567125/111061086-77e84080-84c7-11eb-8085-78d0ae4e3e19.png)
+![image](https://user-images.githubusercontent.com/75567125/111061095-86cef300-84c7-11eb-8d0a-3bb176118554.png)
+![image](https://user-images.githubusercontent.com/75567125/111061105-95b5a580-84c7-11eb-929c-e3b318d58010.png)
+![image](https://user-images.githubusercontent.com/75567125/111061110-9fd7a400-84c7-11eb-85f4-babe37de1f0a.png)
 
 
 # Project Setup
