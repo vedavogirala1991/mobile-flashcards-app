@@ -1,8 +1,12 @@
 # mobile-flashcards-app
 
 
-This repo is a react-native assignment as part of the React Nano Degree Program, this project demonstrates 
+This repo is a react-native assignment as part of the React Nano Degree Program, this project demonstrates
 Mobile Flashcards App - a React Native app for iOS and Android that allows users to create decks, add cards and quiz themselves.
+
+# App Pages
+
+
 
 # Project Setup
 
@@ -49,6 +53,12 @@ This will start the process of "ejecting" from Create React Native App's build s
 
 Warning: Running eject is a permanent action (aside from whatever version control system you use). An ejected app will require you to have an Xcode and/or Android Studio environment set up.
 
+# Contributors
 
+Author - Veda Vogirala
 
+Profile - https://github.com/vedavogirala1991
 
+# Testing the Application
+
+This App was tested on IOS device using the expo-cli and Expo client App from devices App Store.
