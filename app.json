@@ -21,7 +21,7 @@
       "backgroundColor": "#ffffff"
     },
     "notification": {
-      "icon": "./images/flashcards_thumbnail.png"
+      "icon": "./images/flashcards.png"
     },
     "githubUrl": "https://github.com/vedavogirala1991/mobile-flashcards-app"
   }
