@@ -3,7 +3,7 @@ import {retrieveDecks,FLASHCARDS_STORAGE_KEY} from './_decks'
 
 export const fetchDeckDetails = async () => {
   try {
-    storeDeskResults(retrieveDecks())
+    //storeDeskResults(retrieveDecks())
     const results = await AsyncStorage.getItem(FLASHCARDS_STORAGE_KEY)
     return results != null ? JSON.parse(results) : storeDeskResults(retrieveDecks())
   } catch (err) {
