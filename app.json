@@ -7,6 +7,22 @@
     "version": "1.0.0",
     "assetBundlePatterns": [
       "**/*"
-    ]
+    ],
+    "privacy": "public",
+    "platforms": [
+      "ios",
+      "android"
+    ],
+    "orientation": "portrait",
+    "icon": "./images/flashcards.png",
+    "splash": {
+      "image": "./images/flashcards_splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "notification": {
+      "icon": "./images/flashcards_thumbnail.png"
+    },
+    "githubUrl": "https://github.com/vedavogirala1991/mobile-flashcards-app"
   }
 }
